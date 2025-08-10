@@ -5,8 +5,8 @@ import Principal "mo:base/Principal";
 
 actor Token {
     // Token info
-    private let name = "NeonCoin";
-    private let symbol = "NEON";
+    private let name = "ShadowFire";
+    private let symbol = "SHF";
     private let creator = Principal.fromText("ud2uu-gpjc4-a7y2f-qp2bu-7yp56-lqpen-ngv6i-uif2h-4tm6j-v5w2o-cqe");
     
     // Storage
