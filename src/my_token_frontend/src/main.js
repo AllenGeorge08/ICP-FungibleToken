@@ -103,7 +103,7 @@ async function checkOtherBalance() {
 
     try {
         const balance = await actor.balanceOf(Principal.fromText(principal));
-        showResult(resultDiv, `Balance: ${balance.toLocaleString()} SHF`, 'success');
+        showResult(resultDiv, `Balance: ${balance.toLocaleString()} NEON`, 'success');
     } catch (error) {
         showResult(resultDiv, 'Error checking balance: ' + error.message, 'error');
     }

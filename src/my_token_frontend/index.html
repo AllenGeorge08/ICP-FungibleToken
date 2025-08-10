@@ -3,185 +3,465 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ShadowFire Token</title>
+    <title>NeonCoin Protocol</title>
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap');
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Orbitron', monospace;
             max-width: 900px;
             margin: 0 auto;
             padding: 20px;
-            background: linear-gradient(135deg, #000000 0%, #1a1a1a 50%, #2d1810 100%);
+            background: linear-gradient(135deg, #001100 0%, #003300 50%, #002200 100%);
             min-height: 100vh;
-            color: #ffffff;
+            color: #00ff00;
+            overflow-x: hidden;
         }
         .container {
-            background: linear-gradient(145deg, #1a1a1a, #0d0d0d);
-            padding: 35px;
-            border-radius: 15px;
-            box-shadow: 0 8px 25px rgba(255, 140, 0, 0.3), inset 0 1px 0 rgba(255, 140, 0, 0.1);
-            border: 1px solid rgba(255, 140, 0, 0.2);
+            background: linear-gradient(145deg, #0a0a0a, #001a00);
+            padding: 40px;
+            border-radius: 25px;
+            box-shadow: 0 15px 40px rgba(0, 255, 0, 0.3), inset 0 2px 0 rgba(0, 255, 0, 0.1);
+            border: 3px solid rgba(0, 255, 0, 0.4);
+            position: relative;
+        }
+        .container::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(45deg, #00ff00, #00cc00, #009900);
+            border-radius: 25px;
+            z-index: -1;
+            animation: borderGlow 2s ease-in-out infinite alternate;
+        }
+        @keyframes borderGlow {
+            0% { opacity: 0.5; }
+            100% { opacity: 1; }
         }
         h1 {
-            background: linear-gradient(45deg, #ff8c00, #ff6600, #ff4500);
+            background: linear-gradient(45deg, #00ff00, #00cc00, #66ff66);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
             text-align: center;
-            margin-bottom: 30px;
-            font-size: 2.5rem;
-            font-weight: bold;
-            text-shadow: 0 0 20px rgba(255, 140, 0, 0.5);
+            margin-bottom: 40px;
+            font-size: 3rem;
+            font-weight: 900;
+            text-shadow: 0 0 30px rgba(0, 255, 0, 0.8);
+            letter-spacing: 3px;
+            animation: titlePulse 3s ease-in-out infinite;
+        }
+        @keyframes titlePulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
         }
         .token-info {
-            background: linear-gradient(135deg, #2d1810, #1a1a1a);
-            padding: 25px;
-            border-radius: 12px;
-            margin-bottom: 30px;
+            background: linear-gradient(135deg, #002200, #001100);
+            padding: 35px;
+            border-radius: 20px;
+            margin-bottom: 40px;
             text-align: center;
-            border: 1px solid rgba(255, 140, 0, 0.3);
-            box-shadow: 0 4px 15px rgba(255, 140, 0, 0.1);
+            border: 2px solid rgba(0, 255, 0, 0.5);
+            box-shadow: 0 8px 25px rgba(0, 255, 0, 0.2);
         }
         .section {
-            background: linear-gradient(135deg, #1a1a1a, #0d0d0d);
-            padding: 25px;
-            margin: 20px 0;
-            border-radius: 12px;
-            border: 1px solid rgba(255, 140, 0, 0.2);
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            background: linear-gradient(135deg, #001100, #000a00);
+            padding: 35px;
+            margin: 30px 0;
+            border-radius: 20px;
+            border: 2px solid rgba(0, 255, 0, 0.3);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
+            transition: transform 0.3s ease;
+        }
+        .section:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 35px rgba(0, 255, 0, 0.2);
         }
         .section h3 {
-            color: #ff8c00;
+            color: #00ff00;
             margin-top: 0;
-            font-size: 1.3rem;
+            font-size: 1.5rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
         }
         .form-group {
-            margin: 15px 0;
+            margin: 25px 0;
         }
         label {
             display: block;
-            margin-bottom: 8px;
-            font-weight: 600;
-            color: #ff8c00;
+            margin-bottom: 12px;
+            font-weight: 700;
+            color: #00ff00;
+            text-transform: uppercase;
+            font-size: 15px;
+            letter-spacing: 1px;
         }
         input {
             width: 100%;
-            padding: 12px;
+            padding: 18px;
             background: #000000;
-            border: 2px solid rgba(255, 140, 0, 0.3);
-            border-radius: 8px;
+            border: 3px solid rgba(0, 255, 0, 0.4);
+            border-radius: 12px;
             box-sizing: border-box;
-            color: #ffffff;
-            font-size: 16px;
-            transition: border-color 0.3s ease;
+            color: #00ff00;
+            font-size: 18px;
+            font-family: 'Orbitron', monospace;
+            transition: all 0.4s ease;
         }
         input:focus {
             outline: none;
-            border-color: #ff8c00;
-            box-shadow: 0 0 10px rgba(255, 140, 0, 0.3);
+            border-color: #00ff00;
+            box-shadow: 0 0 20px rgba(0, 255, 0, 0.5);
+            background: #001100;
         }
         input::placeholder {
-            color: #666;
+            color: #006600;
         }
         button {
-            background: linear-gradient(45deg, #ff8c00, #ff6600);
+            background: linear-gradient(45deg, #00ff00, #00cc00);
             color: #000000;
-            padding: 14px 24px;
+            padding: 20px 35px;
             border: none;
-            border-radius: 8px;
+            border-radius: 12px;
             cursor: pointer;
-            font-size: 16px;
-            font-weight: bold;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(255, 140, 0, 0.3);
+            font-size: 18px;
+            font-weight: 700;
+            font-family: 'Orbitron', monospace;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.4s ease;
+            box-shadow: 0 8px 25px rgba(0, 255, 0, 0.4);
         }
         button:hover {
-            background: linear-gradient(45deg, #ff6600, #ff4500);
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(255, 140, 0, 0.4);
+            background: linear-gradient(45deg, #00cc00, #009900);
+            transform: translateY(-4px);
+            box-shadow: 0 12px 35px rgba(0, 255, 0, 0.6);
         }
         .result {
-            margin-top: 15px;
-            padding: 12px;
-            border-radius: 8px;
-            border-left: 4px solid;
+            margin-top: 25px;
+            padding: 18px;
+            border-radius: 12px;
+            border-left: 6px solid;
+            font-family: 'Orbitron', monospace;
         }
         .success {
-            background: rgba(40, 167, 69, 0.2);
-            color: #28a745;
-            border-left-color: #28a745;
+            background: rgba(0, 255, 0, 0.1);
+            color: #00ff00;
+            border-left-color: #00ff00;
         }
         .error {
-            background: rgba(220, 53, 69, 0.2);
-            color: #dc3545;
-            border-left-color: #dc3545;
+            background: rgba(255, 0, 0, 0.1);
+            color: #ff0040;
+            border-left-color: #ff0040;
         }
         .balance-display {
-            font-size: 28px;
-            font-weight: bold;
-            background: linear-gradient(45deg, #ff8c00, #ff6600);
+            font-size: 36px;
+            font-weight: 900;
+            background: linear-gradient(45deg, #00ff00, #66ff66);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-            text-shadow: 0 0 10px rgba(255, 140, 0, 0.3);
+            text-shadow: 0 0 20px rgba(0, 255, 0, 0.5);
+            font-family: 'Orbitron', monospace;
         }
         .token-info p {
-            margin: 10px 0;
-            font-size: 18px;
+            margin: 18px 0;
+            font-size: 22px;
+            font-family: 'Orbitron', monospace;
+            font-weight: 400;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>🔥 ShadowFire Token System</h1>
+        <h1>🟢 NeonCoin Protocol</h1>
         
         <div class="token-info">
-            <h3>Token Information</h3>
-            <p><strong>Name:</strong> <span id="tokenName">ShadowFire</span></p>
-            <p><strong>Symbol:</strong> <span id="tokenSymbol">SHF</span></p>
-            <p><strong>Total Supply:</strong> <span id="totalSupply" class="balance-display">Loading...</span></p>
+            <h3>Protocol Stats</h3>
+            <p><strong>Token:</strong> <span id="tokenName">NeonCoin</span></p>
+            <p><strong>Ticker:</strong> <span id="tokenSymbol">NEON</span></p>
+            <p><strong>Supply:</strong> <span id="totalSupply" class="balance-display">Loading...</span></p>
         </div>
 
         <div class="section">
-            <h3>🔥 Your Balance</h3>
-            <p>Current Balance: <span id="userBalance" class="balance-display">Loading...</span> SHF</p>
-            <button id="refreshBalanceBtn">Refresh Balance</button>
+            <h3>💚 My Holdings</h3>
+            <p>Balance: <span id="userBalance" class="balance-display">Loading...</span> NEON</p>
+            <button id="refreshBalanceBtn">Update Balance</button>
         </div>
 
         <div class="section">
-            <h3>⚡ Transfer Tokens</h3>
+            <h3>💸 Transfer Funds</h3>
             <div class="form-group">
-                <label>Recipient Principal ID:</label>
-                <input type="text" id="transferTo" placeholder="Enter recipient's principal ID">
+                <label>Destination:</label>
+                <input type="text" id="transferTo" placeholder="Enter wallet address">
             </div>
             <div class="form-group">
-                <label>Amount:</label>
-                <input type="number" id="transferAmount" placeholder="Enter amount to transfer">
+                <label>Value:</label>
+                <input type="number" id="transferAmount" placeholder="Enter amount to send">
             </div>
-            <button id="transferBtn">Send Tokens</button>
+            <button id="transferBtn">Send Payment</button>
             <div id="transferResult" class="result" style="display: none;"></div>
         </div>
 
         <div class="section">
-            <h3>🌟 Mint Tokens (Creator Only)</h3>
+            <h3>⭐ Token Minting (Owner)</h3>
             <div class="form-group">
-                <label>Recipient Principal ID:</label>
-                <input type="text" id="mintTo" placeholder="Enter recipient's principal ID">
+                <label>Mint To:</label>
+                <input type="text" id="mintTo" placeholder="Enter destination address">
             </div>
             <div class="form-group">
-                <label>Amount:</label>
-                <input type="number" id="mintAmount" placeholder="Enter amount to mint">
+                <label>Quantity:</label>
+                <input type="number" id="mintAmount" placeholder="Enter mint quantity">
             </div>
             <button id="mintBtn">Mint Tokens</button>
             <div id="mintResult" class="result" style="display: none;"></div>
         </div>
 
         <div class="section">
-            <h3>🔍 Check Any Balance</h3>
+            <h3>📊 Balance Check</h3>
+            <div class="form-group"><!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NeonCoin Protocol</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap');
+        body {
+            font-family: 'Orbitron', monospace;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            background: linear-gradient(135deg, #001100 0%, #003300 50%, #002200 100%);
+            min-height: 100vh;
+            color: #00ff00;
+            overflow-x: hidden;
+        }
+        .container {
+            background: linear-gradient(145deg, #0a0a0a, #001a00);
+            padding: 40px;
+            border-radius: 25px;
+            box-shadow: 0 15px 40px rgba(0, 255, 0, 0.3), inset 0 2px 0 rgba(0, 255, 0, 0.1);
+            border: 3px solid rgba(0, 255, 0, 0.4);
+            position: relative;
+        }
+        .container::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(45deg, #00ff00, #00cc00, #009900);
+            border-radius: 25px;
+            z-index: -1;
+            animation: borderGlow 2s ease-in-out infinite alternate;
+        }
+        @keyframes borderGlow {
+            0% { opacity: 0.5; }
+            100% { opacity: 1; }
+        }
+        h1 {
+            background: linear-gradient(45deg, #00ff00, #00cc00, #66ff66);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-align: center;
+            margin-bottom: 40px;
+            font-size: 3rem;
+            font-weight: 900;
+            text-shadow: 0 0 30px rgba(0, 255, 0, 0.8);
+            letter-spacing: 3px;
+            animation: titlePulse 3s ease-in-out infinite;
+        }
+        @keyframes titlePulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+        .token-info {
+            background: linear-gradient(135deg, #002200, #001100);
+            padding: 35px;
+            border-radius: 20px;
+            margin-bottom: 40px;
+            text-align: center;
+            border: 2px solid rgba(0, 255, 0, 0.5);
+            box-shadow: 0 8px 25px rgba(0, 255, 0, 0.2);
+        }
+        .section {
+            background: linear-gradient(135deg, #001100, #000a00);
+            padding: 35px;
+            margin: 30px 0;
+            border-radius: 20px;
+            border: 2px solid rgba(0, 255, 0, 0.3);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
+            transition: transform 0.3s ease;
+        }
+        .section:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 35px rgba(0, 255, 0, 0.2);
+        }
+        .section h3 {
+            color: #00ff00;
+            margin-top: 0;
+            font-size: 1.5rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        .form-group {
+            margin: 25px 0;
+        }
+        label {
+            display: block;
+            margin-bottom: 12px;
+            font-weight: 700;
+            color: #00ff00;
+            text-transform: uppercase;
+            font-size: 15px;
+            letter-spacing: 1px;
+        }
+        input {
+            width: 100%;
+            padding: 18px;
+            background: #000000;
+            border: 3px solid rgba(0, 255, 0, 0.4);
+            border-radius: 12px;
+            box-sizing: border-box;
+            color: #00ff00;
+            font-size: 18px;
+            font-family: 'Orbitron', monospace;
+            transition: all 0.4s ease;
+        }
+        input:focus {
+            outline: none;
+            border-color: #00ff00;
+            box-shadow: 0 0 20px rgba(0, 255, 0, 0.5);
+            background: #001100;
+        }
+        input::placeholder {
+            color: #006600;
+        }
+        button {
+            background: linear-gradient(45deg, #00ff00, #00cc00);
+            color: #000000;
+            padding: 20px 35px;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            font-size: 18px;
+            font-weight: 700;
+            font-family: 'Orbitron', monospace;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.4s ease;
+            box-shadow: 0 8px 25px rgba(0, 255, 0, 0.4);
+        }
+        button:hover {
+            background: linear-gradient(45deg, #00cc00, #009900);
+            transform: translateY(-4px);
+            box-shadow: 0 12px 35px rgba(0, 255, 0, 0.6);
+        }
+        .result {
+            margin-top: 25px;
+            padding: 18px;
+            border-radius: 12px;
+            border-left: 6px solid;
+            font-family: 'Orbitron', monospace;
+        }
+        .success {
+            background: rgba(0, 255, 0, 0.1);
+            color: #00ff00;
+            border-left-color: #00ff00;
+        }
+        .error {
+            background: rgba(255, 0, 0, 0.1);
+            color: #ff0040;
+            border-left-color: #ff0040;
+        }
+        .balance-display {
+            font-size: 36px;
+            font-weight: 900;
+            background: linear-gradient(45deg, #00ff00, #66ff66);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 0 0 20px rgba(0, 255, 0, 0.5);
+            font-family: 'Orbitron', monospace;
+        }
+        .token-info p {
+            margin: 18px 0;
+            font-size: 22px;
+            font-family: 'Orbitron', monospace;
+            font-weight: 400;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🟢 NeonCoin Protocol</h1>
+        
+        <div class="token-info">
+            <h3>Protocol Stats</h3>
+            <p><strong>Token:</strong> <span id="tokenName">NeonCoin</span></p>
+            <p><strong>Ticker:</strong> <span id="tokenSymbol">NEON</span></p>
+            <p><strong>Supply:</strong> <span id="totalSupply" class="balance-display">Loading...</span></p>
+        </div>
+
+        <div class="section">
+            <h3>💚 My Holdings</h3>
+            <p>Balance: <span id="userBalance" class="balance-display">Loading...</span> NEON</p>
+            <button id="refreshBalanceBtn">Update Balance</button>
+        </div>
+
+        <div class="section">
+            <h3>💸 Transfer Funds</h3>
             <div class="form-group">
-                <label>Principal ID:</label>
-                <input type="text" id="checkPrincipal" placeholder="Enter principal ID to check">
+                <label>Destination:</label>
+                <input type="text" id="transferTo" placeholder="Enter wallet address">
             </div>
-            <button id="checkBalanceBtn">Check Balance</button>
+            <div class="form-group">
+                <label>Value:</label>
+                <input type="number" id="transferAmount" placeholder="Enter amount to send">
+            </div>
+            <button id="transferBtn">Send Payment</button>
+            <div id="transferResult" class="result" style="display: none;"></div>
+        </div>
+
+        <div class="section">
+            <h3>⭐ Token Minting (Owner)</h3>
+            <div class="form-group">
+                <label>Mint To:</label>
+                <input type="text" id="mintTo" placeholder="Enter destination address">
+            </div>
+            <div class="form-group">
+                <label>Quantity:</label>
+                <input type="number" id="mintAmount" placeholder="Enter mint quantity">
+            </div>
+            <button id="mintBtn">Mint Tokens</button>
+            <div id="mintResult" class="result" style="display: none;"></div>
+        </div>
+
+        <div class="section">
+            <h3>📊 Balance Check</h3>
+            <div class="form-group">
+                <label>Wallet Address:</label>
+                <input type="text" id="checkPrincipal" placeholder="Enter address to check">
+            </div>
+            <button id="checkBalanceBtn">Get Balance</button>
+            <div id="balanceResult" class="result" style="display: none;"></div>
+        </div>
+    </div>
+
+    <script type="module" src="/src/main.js"></script>
+</body>
+</html>
+                <label>Wallet Address:</label>
+                <input type="text" id="checkPrincipal" placeholder="Enter address to check">
+            </div>
+            <button id="checkBalanceBtn">Get Balance</button>
             <div id="balanceResult" class="result" style="display: none;"></div>
         </div>
     </div>
