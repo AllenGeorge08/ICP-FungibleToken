@@ -1,0 +1,26 @@
+{
+  "canisters": {
+    "my_token_backend": {
+      "main": "src/my_token_backend/main.mo",
+      "type": "motoko"
+    },
+    "my_token_frontend": {
+      "dependencies": [
+        "my_token_backend"
+      ],
+      "source": [
+        "src/my_token_frontend/dist"
+      ],
+      "type": "assets",
+      "workspace": "my_token_frontend"
+    }
+  },
+  "defaults": {
+    "build": {
+      "args": "",
+      "packtool": ""
+    }
+  },
+  "output_env_file": ".env",
+  "version": 1
+}
