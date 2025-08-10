@@ -1,20 +1,191 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-  <meta charset="UTF-8" />
-  <link rel="icon" type="image/svg+xml" href="/favicon.ico" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>IC Hello Starter</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ShadowFire Token</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            background: linear-gradient(135deg, #000000 0%, #1a1a1a 50%, #2d1810 100%);
+            min-height: 100vh;
+            color: #ffffff;
+        }
+        .container {
+            background: linear-gradient(145deg, #1a1a1a, #0d0d0d);
+            padding: 35px;
+            border-radius: 15px;
+            box-shadow: 0 8px 25px rgba(255, 140, 0, 0.3), inset 0 1px 0 rgba(255, 140, 0, 0.1);
+            border: 1px solid rgba(255, 140, 0, 0.2);
+        }
+        h1 {
+            background: linear-gradient(45deg, #ff8c00, #ff6600, #ff4500);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 2.5rem;
+            font-weight: bold;
+            text-shadow: 0 0 20px rgba(255, 140, 0, 0.5);
+        }
+        .token-info {
+            background: linear-gradient(135deg, #2d1810, #1a1a1a);
+            padding: 25px;
+            border-radius: 12px;
+            margin-bottom: 30px;
+            text-align: center;
+            border: 1px solid rgba(255, 140, 0, 0.3);
+            box-shadow: 0 4px 15px rgba(255, 140, 0, 0.1);
+        }
+        .section {
+            background: linear-gradient(135deg, #1a1a1a, #0d0d0d);
+            padding: 25px;
+            margin: 20px 0;
+            border-radius: 12px;
+            border: 1px solid rgba(255, 140, 0, 0.2);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+        }
+        .section h3 {
+            color: #ff8c00;
+            margin-top: 0;
+            font-size: 1.3rem;
+        }
+        .form-group {
+            margin: 15px 0;
+        }
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #ff8c00;
+        }
+        input {
+            width: 100%;
+            padding: 12px;
+            background: #000000;
+            border: 2px solid rgba(255, 140, 0, 0.3);
+            border-radius: 8px;
+            box-sizing: border-box;
+            color: #ffffff;
+            font-size: 16px;
+            transition: border-color 0.3s ease;
+        }
+        input:focus {
+            outline: none;
+            border-color: #ff8c00;
+            box-shadow: 0 0 10px rgba(255, 140, 0, 0.3);
+        }
+        input::placeholder {
+            color: #666;
+        }
+        button {
+            background: linear-gradient(45deg, #ff8c00, #ff6600);
+            color: #000000;
+            padding: 14px 24px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(255, 140, 0, 0.3);
+        }
+        button:hover {
+            background: linear-gradient(45deg, #ff6600, #ff4500);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(255, 140, 0, 0.4);
+        }
+        .result {
+            margin-top: 15px;
+            padding: 12px;
+            border-radius: 8px;
+            border-left: 4px solid;
+        }
+        .success {
+            background: rgba(40, 167, 69, 0.2);
+            color: #28a745;
+            border-left-color: #28a745;
+        }
+        .error {
+            background: rgba(220, 53, 69, 0.2);
+            color: #dc3545;
+            border-left-color: #dc3545;
+        }
+        .balance-display {
+            font-size: 28px;
+            font-weight: bold;
+            background: linear-gradient(45deg, #ff8c00, #ff6600);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 0 0 10px rgba(255, 140, 0, 0.3);
+        }
+        .token-info p {
+            margin: 10px 0;
+            font-size: 18px;
+        }
+    </style>
 </head>
-
 <body>
-  <div class="browser-warning">
-    ⚠️ If this page appears broken, try reloading. If the problem persists, try switching browsers; Chrome or
-    Firefox are recommended.
-  </div>
-  <div id="root"></div>
-  <script type="module" src="/src/main.js"></script>
-</body>
+    <div class="container">
+        <h1>🔥 ShadowFire Token System</h1>
+        
+        <div class="token-info">
+            <h3>Token Information</h3>
+            <p><strong>Name:</strong> <span id="tokenName">ShadowFire</span></p>
+            <p><strong>Symbol:</strong> <span id="tokenSymbol">SHF</span></p>
+            <p><strong>Total Supply:</strong> <span id="totalSupply" class="balance-display">Loading...</span></p>
+        </div>
 
+        <div class="section">
+            <h3>🔥 Your Balance</h3>
+            <p>Current Balance: <span id="userBalance" class="balance-display">Loading...</span> SHF</p>
+            <button id="refreshBalanceBtn">Refresh Balance</button>
+        </div>
+
+        <div class="section">
+            <h3>⚡ Transfer Tokens</h3>
+            <div class="form-group">
+                <label>Recipient Principal ID:</label>
+                <input type="text" id="transferTo" placeholder="Enter recipient's principal ID">
+            </div>
+            <div class="form-group">
+                <label>Amount:</label>
+                <input type="number" id="transferAmount" placeholder="Enter amount to transfer">
+            </div>
+            <button id="transferBtn">Send Tokens</button>
+            <div id="transferResult" class="result" style="display: none;"></div>
+        </div>
+
+        <div class="section">
+            <h3>🌟 Mint Tokens (Creator Only)</h3>
+            <div class="form-group">
+                <label>Recipient Principal ID:</label>
+                <input type="text" id="mintTo" placeholder="Enter recipient's principal ID">
+            </div>
+            <div class="form-group">
+                <label>Amount:</label>
+                <input type="number" id="mintAmount" placeholder="Enter amount to mint">
+            </div>
+            <button id="mintBtn">Mint Tokens</button>
+            <div id="mintResult" class="result" style="display: none;"></div>
+        </div>
+
+        <div class="section">
+            <h3>🔍 Check Any Balance</h3>
+            <div class="form-group">
+                <label>Principal ID:</label>
+                <input type="text" id="checkPrincipal" placeholder="Enter principal ID to check">
+            </div>
+            <button id="checkBalanceBtn">Check Balance</button>
+            <div id="balanceResult" class="result" style="display: none;"></div>
+        </div>
+    </div>
+
+    <script type="module" src="/src/main.js"></script>
+</body>
 </html>
